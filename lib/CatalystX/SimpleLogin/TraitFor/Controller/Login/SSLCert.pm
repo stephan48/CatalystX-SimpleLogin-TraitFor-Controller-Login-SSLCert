@@ -38,20 +38,20 @@ sub login_sslcert : Chained('/') PathPart('login/sslcert') Args(0) {
 
     if(!$c->engine->env->{"SSL_CLIENT_VERIFY"} eq "SUCCESS")
     {
-        $c->stash( 'error_msg' => "SSL Client Cert Login failed! CLIENT CERT NOT SUCCESSFULLY VERIFIED!");
+        $c->flash( 'error_msg' => "SSL Client Cert Login failed! CLIENT CERT NOT SUCCESSFULLY VERIFIED!");
         $c->detach;
     }
 
     if($c->authenticate({}, $self->sslcert_realm))
     {
-        $c->stash( 'success_msg' => "SSL Client Cert Login Successfull!" );
+        $c->flash( 'success_msg' => "SSL Client Cert Login Successfull!" );
+		$c->res->redirect($self->redirect_after_login_uri($c));
     }
     else
     {
-        $c->stash( 'error_msg'   => sprintf("Sorry but SSL Client Cert Login failed! Your DN was \"%s\"!", $c->engine->env->{'SSL_CLIENT_S_DN'}));
+        $c->flash( 'error_msg'   => sprintf("Sorry but SSL Client Cert Login failed! Your DN was \"%s\"!", $c->engine->env->{'SSL_CLIENT_S_DN'}));
+		$c->stash( 'template'    => 'index.tt');
     }
-
-	$c->res->redirect($self->redirect_after_login_uri($c));
 }
 
 1;
