@@ -3,6 +3,8 @@ use MooseX::MethodAttributes::Role;
 use MooseX::Types::Moose qw/ HashRef ArrayRef ClassName Object Str /;
 use namespace::autoclean;
 
+# ABSTRACT: SSL Client Cert Login!
+
 has 'sslcert_host' => (
 	isa => "Str",
 	is  => "rw",
@@ -27,7 +29,7 @@ sub login_sslcert : Chained('/') PathPart('login/sslcert') Args(0) {
 		$c->detach();
 	}
 
-	if(!($uri->scheme eq "https")
+	if(!($uri->scheme eq "https"))
 	{
         $uri->scheme("https");
         $c->res->redirect($uri);
