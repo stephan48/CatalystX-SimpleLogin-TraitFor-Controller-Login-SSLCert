@@ -1,4 +1,4 @@
-package Catalyst::TraitFor::Controller::Login::SSLCert;
+package CatalystX::SimpleLogin::TraitFor::Controller::Login::SSLCert;
 use MooseX::MethodAttributes::Role;
 use MooseX::Types::Moose qw/ HashRef ArrayRef ClassName Object Str /;
 use namespace::autoclean;
@@ -58,7 +58,7 @@ sub login_sslcert : Chained('/') PathPart('login/sslcert') Args(0) {
 
 =head1 NAME
 
-Catalyst::TraitFor::Controller::Login::SSLCert
+CatalystX::SimpleLogin::TraitFor::Controller::Login::SSLCert
 
 =head1 DESCRIPTION
 
