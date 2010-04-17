@@ -51,7 +51,7 @@ sub login_sslcert : Chained('/') PathPart('login/sslcert') Args(0) {
         $c->stash( 'error_msg'   => sprintf("Sorry but SSL Client Cert Login failed! Your DN was \"%s\"!", $c->engine->env->{'SSL_CLIENT_S_DN'}));
     }
 
-	$c->stash( 'template' => 'index.tt');
+	$c->res->redirect($self->redirect_after_login_uri($c));
 }
 
 1;
